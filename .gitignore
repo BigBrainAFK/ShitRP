@@ -1,0 +1,11 @@
+﻿# VS Stuff
+.vs
+
+# Build folders
+obj/
+ShitRP.dll
+ShitRP.pdb
+
+# NuGET Packages
+packages/
+types-gt-mp
