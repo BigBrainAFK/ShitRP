@@ -14,7 +14,7 @@ namespace ShitRP.structures
         /// <summary>
         /// Client object representing the GTMP player
         /// </summary>
-        private Client player { get; }
+        public Client client { get; }
 
         /// <summary>
         /// Level of the player
@@ -92,7 +92,7 @@ namespace ShitRP.structures
         /// <param name="player">Client object representing the GTMP player</param>
         public Player(Client player)
         {
-            this.player = player;
+            this.client = player;
         }
 
         /// <summary>

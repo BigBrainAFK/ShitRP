@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\GT-MP-Server\resources\ShitRP\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -62,11 +62,14 @@
     <Compile Include="structures\interfaces\IVehicle.cs" />
     <Compile Include="structures\Player.cs" />
     <Compile Include="structures\Role.cs" />
+    <Compile Include="util\Arraysplit.cs" />
     <Compile Include="util\Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="jsconfig.json" />
     <None Include="packages.config" />
+    <None Include="scripts\post-build.bat" />
+    <None Include="scripts\pre-build.bat" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="types-gt-mp\Declarations.d.ts" />
@@ -106,5 +109,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PostBuildEvent>cd "$(ProjectDir)scripts"
+powershell start-process post-build.bat</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PreBuildEvent>cd "$(ProjectDir)scripts"
+./pre-build.bat</PreBuildEvent>
+  </PropertyGroup>
 </Project>

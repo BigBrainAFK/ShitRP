@@ -3,6 +3,7 @@
 
 # Build folders
 obj/
+bin/
 ShitRP.dll
 ShitRP.pdb
 

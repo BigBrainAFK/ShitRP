@@ -14,10 +14,11 @@ namespace ShitRP.commands
             this.usage = "/givegun [player] [gun] [ammo] [equip]";
             this.example = "/givegun Max_Mustermann CombatMGMk2 10 true";
             this.permLvl = util.Permission.manageGun;
+            this.category = "Admin";
             this.script = script;
         }
 
-        public override bool run(Client player, string[] args)
+        public override bool run(Player player, string[] args)
         {
             if (args.Length != 4) return this.wrongUsage(player);
 
@@ -35,9 +36,11 @@ namespace ShitRP.commands
                 {
                     target = script.API.getPlayerFromName(args[0]);
 
-                    if (target == null) target = player;
+                    if (target == null) target = player.client;
 
                     ammo = int.Parse(args[2]);
+                    if (ammo > 9999) return this.wrongUsage(player);
+
                     equip = bool.Parse(args[3]);
                 }
                 catch (Exception ex)
@@ -62,7 +65,7 @@ namespace ShitRP.commands
                 return this.wrongUsage(player);
             }
 
-            script.API.sendChatMessageToPlayer(player, "Success2");
+            script.API.sendChatMessageToPlayer(player.client, "Success2");
             return true;
         }
     }

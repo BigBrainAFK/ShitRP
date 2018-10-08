@@ -1,16 +1,5 @@
 <meta>
-    <info name="ShitRP" author="BigBrainAFK" type="gamemode"/>
+    <info name="ShitRP" author="BigBrainAFK" version="0.1-beta" type="gamemode"/>
 
-    <script src="util\Constants.cs" type="server" lang="csharp" />
-    <script src="structures\interfaces\ICommand.cs" type="server" lang="csharp" />
-    <script src="structures\interfaces\IFaction.cs" type="server" lang="csharp" />
-    <script src="structures\interfaces\IHouse.cs" type="server" lang="csharp" />
-    <script src="structures\interfaces\IItem.cs" type="server" lang="csharp" />
-    <script src="structures\interfaces\IJob.cs" type="server" lang="csharp" />
-    <script src="structures\interfaces\IVehicle.cs" type="server" lang="csharp" />
-    <script src="structures\Command.cs" type="server" lang="csharp" />
-    <script src="structures\Player.cs" type="server" lang="csharp" />
-    <script src="commands\Help.cs" type="server" lang="csharp" />
-    <script src="commands\GiveGun.cs" type="server" lang="csharp" />
-    <script src="Gamemode.cs" type="server" lang="csharp" />
+    <script src="ShitRP.dll" type="server" lang="compiled"/>
 </meta>

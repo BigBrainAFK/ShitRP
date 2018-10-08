@@ -1,6 +1,7 @@
 ﻿using GrandTheftMultiplayer.Server.API;
 using GrandTheftMultiplayer.Server.Elements;
 using ShitRP.structures.interfaces;
+using ShitRP.structures;
 using ShitRP.util;
 using System;
 
@@ -32,6 +33,11 @@ namespace ShitRP.structures
         protected Permission permLvl;
 
         /// <summary>
+        /// The category of the command (required to build proper help)
+        /// </summary>
+        protected string category;
+
+        /// <summary>
         /// Script object that the command belongs to
         /// </summary>
         protected Script script;
@@ -43,7 +49,7 @@ namespace ShitRP.structures
         /// <param name="args">Arguments of the command string</param>
         /// <returns>True if the command was successful,
         /// false otherwise</returns>
-        public virtual bool run(Client player, string[] args)
+        public virtual bool run(Player player, string[] args)
         {
             return true;
         }
@@ -85,6 +91,15 @@ namespace ShitRP.structures
         }
 
         /// <summary>
+        /// Gets the category of the command
+        /// </summary>
+        /// <returns>The category of the command</returns>
+        public virtual string _category()
+        {
+            return this.category;
+        }
+
+        /// <summary>
         /// Turns the command into a string
         /// </summary>
         /// <returns>The command name</returns>
@@ -98,9 +113,9 @@ namespace ShitRP.structures
         /// </summary>
         /// <param name="player">Player that used the command wrong</param>
         /// <returns>False since the command was used wrong</returns>
-        protected bool wrongUsage(Client player)
+        protected bool wrongUsage(Player player)
         {
-            this.script.API.sendChatMessageToPlayer(player, String.Format("~r~~h~Correct usage: ~s~~y~{0}~n~~r~~h~Example: ~s~~y~{1}", this.usage, this.example));
+            this.script.API.sendChatMessageToPlayer(player.client, String.Format("~r~~h~Correct usage: ~s~~y~{0}~n~~r~~h~Example: ~s~~y~{1}", this.usage, this.example));
             return false;
         }
 
@@ -109,9 +124,9 @@ namespace ShitRP.structures
         /// </summary>
         /// <param name="player">Player that tried to run the command</param>
         /// <returns>False since the command had an error</returns>
-        protected bool error(Client player)
+        protected bool error(Player player)
         {
-            this.script.API.sendChatMessageToPlayer(player, "~y~There was an error while running the command! Please try again.~n~Should this fail multiple times contact the support.");
+            this.script.API.sendChatMessageToPlayer(player.client, "~y~There was an error while running the command! Please try again.~n~Should this fail multiple times contact the support.");
             return false;
         }
     }

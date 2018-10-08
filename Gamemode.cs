@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using GrandTheftMultiplayer.Server.API;
 using GrandTheftMultiplayer.Server.Elements;
-using ShitRP.structures;
 using ShitRP.structures.interfaces;
+using ShitRP.structures;
 using ShitRP.util;
 
 namespace ShitRP
@@ -16,11 +13,13 @@ namespace ShitRP
     public partial class Gamemode : Script
     {
         public Dictionary<string, Type> commands = new Dictionary<string, Type>();
+        public Dictionary<string, Player> players = new Dictionary<string, Player>();
 
         public Gamemode()
         {
             API.onResourceStart += GamemodeStart;
             API.onChatCommand += CommandHandler;
+            API.onPlayerConnected += PlayerConnected;
 
             SetupCommands();
 
@@ -52,9 +51,9 @@ namespace ShitRP
             try
             {
                 API.consoleOutput(instance._name());
-                instance.run(player, args);
+                instance.run(this.players[player.name], args);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 API.sendChatMessageToPlayer(player, "There was an error running the command. Please contact the support with the specific time and date of the occurence.");
@@ -69,10 +68,18 @@ namespace ShitRP
 
             foreach (Type type in typeList)
             {
-                API.consoleOutput(type.Name.ToLower());
+                if (type.ToString().Contains("+")) continue;
 
+                Console.WriteLine(type);
                 this.commands.Add(type.Name.ToLower(), type);
             }
+
+            API.consoleOutput("{0} commands loaded", this.commands.Count);
+        }
+
+        public void PlayerConnected(Client player)
+        {
+            this.players.Add(player.name, new Player(player));
         }
     }
 }
